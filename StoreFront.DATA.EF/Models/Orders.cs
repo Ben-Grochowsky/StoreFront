@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace StoreFront.DATA.EF.Models
 {
-    public partial class Order
+    public partial class Orders
     {
-        public Order()
+        public Orders()
         {
             OrderWeapons = new HashSet<OrderWeapon>();
         }

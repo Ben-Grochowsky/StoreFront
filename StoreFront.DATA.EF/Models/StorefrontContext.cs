@@ -24,7 +24,7 @@ namespace StoreFront.DATA.EF.Models
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<CustomerDetail> CustomerDetails { get; set; } = null!;
         public virtual DbSet<Manufacturer> Manufacturers { get; set; } = null!;
-        public virtual DbSet<Order> Orders { get; set; } = null!;
+        public virtual DbSet<Orders> Orders { get; set; } = null!;
         public virtual DbSet<OrderWeapon> OrderWeapons { get; set; } = null!;
         public virtual DbSet<Universe> Universes { get; set; } = null!;
         public virtual DbSet<Weapon> Weapons { get; set; } = null!;
@@ -212,7 +212,7 @@ namespace StoreFront.DATA.EF.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Order>(entity =>
+            modelBuilder.Entity<Orders>(entity =>
             {
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
