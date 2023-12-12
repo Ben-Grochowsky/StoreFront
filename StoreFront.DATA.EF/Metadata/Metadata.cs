@@ -54,7 +54,7 @@ namespace StoreFront.DATA.EF.Models/*.Metadata*/
 
         [Display(Name = "Image")]
         [StringLength(75)]
-        public string? Image { get; set; }
+        public string? WeaponImage { get; set; }
     }
 
     public class UniverseMetadata

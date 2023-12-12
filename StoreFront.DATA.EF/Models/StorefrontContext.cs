@@ -24,7 +24,7 @@ namespace StoreFront.DATA.EF.Models
         public virtual DbSet<AspNetUserToken> AspNetUserTokens { get; set; } = null!;
         public virtual DbSet<CustomerDetail> CustomerDetails { get; set; } = null!;
         public virtual DbSet<Manufacturer> Manufacturers { get; set; } = null!;
-        public virtual DbSet<Orders> Orders { get; set; } = null!;
+        public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderWeapon> OrderWeapons { get; set; } = null!;
         public virtual DbSet<Universe> Universes { get; set; } = null!;
         public virtual DbSet<Weapon> Weapons { get; set; } = null!;
@@ -34,7 +34,7 @@ namespace StoreFront.DATA.EF.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.\\sqlexpress;Database=Storefront;Trusted_Connection=True;MultipleActiveResultSets=true");
+                optionsBuilder.UseSqlServer("Server=.\\sqlexpress;Database=Storefront;Trusted_Connection=true;MultipleActiveResultSets=true");
             }
         }
 
@@ -133,9 +133,7 @@ namespace StoreFront.DATA.EF.Models
             {
                 entity.HasKey(e => e.UserId);
 
-                entity.Property(e => e.UserId)
-                    .HasMaxLength(128)
-                    .HasColumnName("UserID");
+                entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(50)
@@ -212,7 +210,7 @@ namespace StoreFront.DATA.EF.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Orders>(entity =>
+            modelBuilder.Entity<Order>(entity =>
             {
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
@@ -231,9 +229,7 @@ namespace StoreFront.DATA.EF.Models
                     .HasMaxLength(5)
                     .IsFixedLength();
 
-                entity.Property(e => e.UserId)
-                    .HasMaxLength(128)
-                    .HasColumnName("UserID");
+                entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
@@ -284,15 +280,15 @@ namespace StoreFront.DATA.EF.Models
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Image)
-                    .HasMaxLength(75)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.ManufacturerId).HasColumnName("ManufacturerID");
 
                 entity.Property(e => e.Price).HasColumnType("money");
 
                 entity.Property(e => e.UniverseId).HasColumnName("UniverseID");
+
+                entity.Property(e => e.WeaponImage)
+                    .HasMaxLength(75)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.WeaponName)
                     .HasMaxLength(50)

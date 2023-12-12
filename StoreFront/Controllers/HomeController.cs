@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Asn1.Mozilla;
 using StoreFront.Models;
 using System.Diagnostics;
 
@@ -19,6 +20,16 @@ namespace StoreFront.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        
+        public IActionResult Shop()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
         {
             return View();
         }

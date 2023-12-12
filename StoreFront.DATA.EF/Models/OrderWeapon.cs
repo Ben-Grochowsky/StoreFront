@@ -11,7 +11,7 @@ namespace StoreFront.DATA.EF.Models
         public int Quantity { get; set; }
         public decimal TotalCost { get; set; }
 
-        public virtual Orders Order { get; set; } = null!;
+        public virtual Order Order { get; set; } = null!;
         public virtual Weapon Weapon { get; set; } = null!;
     }
 }

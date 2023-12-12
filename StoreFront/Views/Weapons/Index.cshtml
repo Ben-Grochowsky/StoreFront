@@ -1,0 +1,109 @@
+﻿@model IEnumerable<StoreFront.DATA.EF.Models.Weapon>
+
+@{
+    ViewData["Title"] = "Weapons";
+}
+
+<section class="product_section layout_padding gray-section py-4">
+    <div class="heading_container heading_center">
+        <h1 class="text-center pb-3">Our <span>Weapons</span></h1>
+        <p align="center">
+            @if (User.IsInRole("Admin"))
+            {
+                <span>
+                    <a asp-action="Create" class="btn btn-primary">Create New Item</a> |
+                </span>
+            }
+            <a asp-action="TiledProducts" class="btn btn-primary">Tile View</a>
+        </p>
+    </div>
+</section>
+<section class="product_section col-md-8 offset-2">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.WeaponImage)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.WeaponName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                @* <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InStock)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Discontinued)
+                </th> *@
+                <th>
+                    @Html.DisplayNameFor(model => model.Manufacturer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Universe)
+                </th>
+                @if (User.IsInRole("Admin"))
+                {
+                <th></th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        <img src="~/assets/img/t_@item.WeaponImage" alt="@item.Description">
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.WeaponId">
+                            @Html.DisplayFor(modelItem => item.WeaponName)
+                        </a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    @* <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InStock)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Discontinued)
+                    </td> *@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Manufacturer.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Universe.UniverseName)
+                    </td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.WeaponId">Edit</a> |
+                            @* <a asp-action="Details" asp-route-id="@item.ProductId">Details</a> | *@
+
+                            @*
+                    Conditional Delete Availabitlity
+                    - Only allow users to click on the delete button if the product is not directly related to any orders.
+                    *@
+                            @if (item.OrderWeapons.Any())
+                            {
+                                <a disabled="true" class="text-danger "><s>Delete</s></a>
+                                //del or s tags for strikethrough
+                            }
+                            else
+                            {
+                                <a asp-action="Delete" asp-route-id="@item.WeaponId">Delete</a>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

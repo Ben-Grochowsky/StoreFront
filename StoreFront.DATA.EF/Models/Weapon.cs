@@ -18,10 +18,10 @@ namespace StoreFront.DATA.EF.Models
         public int UniverseId { get; set; }
         public int InStock { get; set; }
         public bool Discontinued { get; set; }
-        public string? Image { get; set; }
+        public string? WeaponImage { get; set; }
 
-        public virtual Manufacturer Manufacturer { get; set; } = null!;
-        public virtual Universe Universe { get; set; } = null!;
+        public virtual Manufacturer? Manufacturer { get; set; }
+        public virtual Universe? Universe { get; set; }
         public virtual ICollection<OrderWeapon> OrderWeapons { get; set; }
     }
 }
